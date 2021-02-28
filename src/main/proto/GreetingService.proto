@@ -1,0 +1,30 @@
+syntax = "proto3";
+package ru.vaseba.grpc;
+
+/*
+  прото файл из которого генерируется java файл
+  генерация происходит следующим образом:
+  1. Добавлениев maven зависимости gRPC
+  2. После внедрения зависимости в закладке Maven-> Lifecycle -> package (Run Maven Build)
+  3. В папке target->generated-sources->protobuf генерируется Java классы (в нашем случае 2 класса ниже)
+ */
+
+//запрос
+message HelloRequest {
+  string name = 1;
+
+  //repeated - список
+  repeated string hobbies = 2;
+}
+
+//ответ
+message HelloResponse {
+  string greeting = 1;
+}
+
+//rpc метод
+service GreetingService {
+  rpc greeting(HelloRequest) returns (HelloResponse);
+}
+
+
